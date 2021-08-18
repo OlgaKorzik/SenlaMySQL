@@ -30,7 +30,7 @@ public class MyConnections {
                 con.close();
                 Log.info("Connection to DB closed successfully");
             } catch (SQLException throwables) {
-                throwables.printStackTrace();
+                Log.error(throwables.getMessage());
             }
 
         }
