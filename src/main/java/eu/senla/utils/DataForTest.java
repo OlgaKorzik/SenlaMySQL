@@ -14,6 +14,8 @@ public final class DataForTest {
             +" VALUES(?,?,?,?)";
     public static String SELECT_FIRST_NAME ="SELECT * FROM "+ TABLE_NAME
             +" WHERE first_name = \"Ivan\"";
+    public static String SELECT_FROM_ID= "SELECT * FROM "+ TABLE_NAME
+            + "WHERE id = ";
     public static String UPDATE_LAST_NAME ="UPDATE "+ TABLE_NAME +" SET last_name=?"
             +" WHERE first_name =  \"Ivan\"";
     public static String SELECT_JOIN_COUNTRY = "SELECT u.town, cntr.country\n"

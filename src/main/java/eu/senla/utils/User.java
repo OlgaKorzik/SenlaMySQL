@@ -13,12 +13,6 @@ public class User {
         this.town = town;
     }
 
-    public User(String first_name, String last_name, String town) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.town = town;
-    }
-
     public int getId() {
         return id;
     }

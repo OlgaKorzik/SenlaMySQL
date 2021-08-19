@@ -1,4 +1,5 @@
 package eu.senla;
+import eu.senla.utils.DaoTable;
 import eu.senla.utils.Log;
 
 import org.junit.jupiter.api.*;
@@ -16,6 +17,7 @@ public class BaseClass {
    @AfterEach
     private void close(TestInfo testInfo){
        MyConnections.disconnect();
+       DaoTable.closePreparedAndResult();
        Log.info("-------Finish test: "+testInfo.getDisplayName()+" -------");
    }
 }

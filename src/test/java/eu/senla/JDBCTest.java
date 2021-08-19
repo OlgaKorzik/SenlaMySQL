@@ -23,6 +23,8 @@ public class JDBCTest extends BaseClass{
     @DisplayName("Check to create new table")
     public void createTableTest(){
         DaoTable.createTable(CREATE_NEW_TABLE);
+        ResultSet rs = DaoTable.selectFromeTable(SELECT_ALL_DATA);
+        assertNull(rs,"Table don't create");
     }
     @Test
     @Order(2)
@@ -30,7 +32,7 @@ public class JDBCTest extends BaseClass{
     public void insertIntoTableTest(){
         User user = new User(20,"Ivan","Ivanov","Toronto");
         DaoTable.insertIntoTable(user, INSERT_DATA_FROM_TABLE);
-        ResultSet rs = DaoTable.selectFromeTable(SELECT_ALL_DATA);
+        ResultSet rs = DaoTable.selectFromeTable(SELECT_FIRST_NAME);
         assertAll("Should return inserted data",
                 ()->assertEquals("20", rs.getString("id")),
                 ()->assertEquals("Ivan",rs.getString("first_name")),
@@ -40,13 +42,10 @@ public class JDBCTest extends BaseClass{
     @Test
     @Order(3)
     @DisplayName("Check to select from first_name")
-    public void selectTest(){
+    public void selectTest() throws SQLException {
         ResultSet rs = DaoTable.selectFromeTable(SELECT_FIRST_NAME);
-        assertAll("Should return inserted data",
-                ()->assertEquals("20", rs.getString("id")),
-                ()->assertEquals("Ivan",rs.getString("first_name")),
-                ()->assertEquals("Ivanov",rs.getString("last_name")),
-                ()->assertEquals("Toronto",rs.getString("town")));
+        String actualName = rs.getString("first_name");
+        assertEquals("Ivan", actualName);
     }
     @Test
     @Order(4)
@@ -68,11 +67,14 @@ public class JDBCTest extends BaseClass{
         assertEquals(expectedCountry,actualCountry, "Don't select");
 
     }
+
     @Test
     @Order(6)
     @DisplayName("Check to deleting data from a table")
     public void deleteDataFromTableTest(){
         DaoTable.deleteFromTable("20",DELETE_FROM_ID);
+        ResultSet rs = DaoTable.selectFromeTable(SELECT_FROM_ID+"20");
+        assertNull(rs,"Don't delete data from a table");
     }
 
     @Test
